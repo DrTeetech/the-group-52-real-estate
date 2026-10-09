@@ -1,0 +1,10 @@
+const express = require('express');
+const { getStaffUsers, createStaffUser, updateStaffUser } = require('../controllers/staffController');
+const { protect } = require('../middleware/auth');
+const authorize = require('../middleware/roles');
+const router = express.Router();
+router.use(protect, authorize('admin', 'super_admin'));
+router.get('/', getStaffUsers);
+router.post('/', createStaffUser);
+router.patch('/:id', updateStaffUser);
+module.exports = router;
