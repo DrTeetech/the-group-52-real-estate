@@ -1,5 +1,5 @@
-const Inquiry = require("../models/Inquiry");
-const Property = require("../models/Property");
+const Inquiry = require("../models/inquiry");
+const Property = require("../models/property");
 
 const createInquiry = async (req, res) => {
   try {
@@ -147,7 +147,7 @@ const updateInquiry = async (req, res) => {
         });
       }
 
-      const User = require("../models/User");
+      const User = require("../models/user");
       const agent = await User.findOne({
         _id: assignedAgent,
         role: { $in: ["agent", "property_manager"] },

@@ -1,5 +1,5 @@
-const Payment = require("../models/Payment");
-const Lease = require("../models/Lease");
+const Payment = require("../models/payment");
+const Lease = require("../models/lease");
 const mongoose = require("mongoose");
 
 const createPaymentRecord = async (req, res) => {

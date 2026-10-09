@@ -1,6 +1,6 @@
 const RentalApplication = require("../models/RentalApplication");
-const Property = require("../models/Property");
-const User = require("../models/User");
+const Property = require("../models/property");
+const User = require("../models/user");
 
 const createApplication = async (req, res) => {
   try {
@@ -265,7 +265,7 @@ const updateApplication = async (req, res) => {
     }
 
     if (status === "approved") {
-      const activeLease = await require("../models/Lease").findOne({
+      const activeLease = await require("../models/lease").findOne({
         property: application.property,
         status: "active",
         endDate: { $gt: new Date() },

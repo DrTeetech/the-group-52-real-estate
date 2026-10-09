@@ -1,5 +1,5 @@
-const Viewing = require("../models/Viewing");
-const Property = require("../models/Property");
+const Viewing = require("../models/viewing");
+const Property = require("../models/property");
 
 const createViewing = async (req, res) => {
   try {
@@ -222,7 +222,7 @@ const updateViewing = async (req, res) => {
         });
       }
 
-      const User = require("../models/User");
+      const User = require("../models/user");
       const agent = await User.findOne({
         _id: assignedAgent,
         role: { $in: ["agent", "property_manager"] },

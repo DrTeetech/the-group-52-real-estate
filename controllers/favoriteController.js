@@ -1,11 +1,5 @@
-const Favorite = require("../models/Favorite");
-const Property = require("../models/Property");
-
-// ==========================================
-// ADD PROPERTY TO FAVORITES
-// POST /api/properties/:id/favorite
-// CUSTOMER ONLY
-// ==========================================
+const Favorite = require("../models/favorite");
+const Property = require("../models/property");
 
 const addFavorite = async (req, res) => {
   try {

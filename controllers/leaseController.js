@@ -1,5 +1,5 @@
-const Lease = require("../models/Lease");
-const Property = require("../models/Property");
+const Lease = require("../models/lease");
+const Property = require("../models/property");
 const RentalApplication = require("../models/RentalApplication");
 const mongoose = require("mongoose");
 
