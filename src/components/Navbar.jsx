@@ -19,6 +19,8 @@ export default function Navbar() {
 
       <nav>
         <NavLink to="/properties">Properties</NavLink>
+        {/* Applications Link: Visible to all users (or restrict to logged-in users if preferred) */}
+        <NavLink to="/applications">Applications</NavLink>
         {user && <NavLink to="/dashboard">Dashboard</NavLink>}
       </nav>
 
