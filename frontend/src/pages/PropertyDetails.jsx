@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import { getPropertyImage } from "../utils/propertyImages";
 
 export default function PropertyDetails() {
   const { slug } = useParams();
@@ -30,8 +31,7 @@ export default function PropertyDetails() {
   if (loading) return <div className="page-center">Loading property...</div>;
   if (!property) return <main className="section"><div className="alert error">{message || "Property not found"}</div></main>;
 
-  const image = property.media?.find((m) => m.type === "image" && m.isFeatured)?.url ||
-    property.media?.find((m) => m.type === "image")?.url;
+  const image = getPropertyImage(property);
 
   async function sendInquiry(e) {
     e.preventDefault();
@@ -70,7 +70,7 @@ export default function PropertyDetails() {
       <div className="detail-layout">
         <div>
           <div className="detail-image">
-            {image ? <img src={image} alt={property.title} /> : <div className="image-placeholder">PROPERTY</div>}
+            <img src={image} alt={property.title} onError={(e) => { e.currentTarget.style.display = "none"; }} />
           </div>
 
           <div className="detail-content">
