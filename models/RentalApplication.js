@@ -28,6 +28,9 @@ const rentalApplicationSchema = new mongoose.Schema(
       type: String,
       enum: [
         "employed",
+        "full_time",
+        "part_time",
+        "contract",
         "self_employed",
         "business_owner",
         "student",
@@ -41,6 +44,28 @@ const rentalApplicationSchema = new mongoose.Schema(
       trim: true,
       maxlength: 200,
     },
+
+    jobTitle: {
+      type: String,
+      trim: true,
+      maxlength: 200,
+    },
+
+    dateOfBirth: Date,
+
+    currentAddress: {
+      type: String,
+      trim: true,
+      maxlength: 500,
+    },
+
+    documents: [
+      {
+        type: String,
+        trim: true,
+        maxlength: 300,
+      },
+    ],
 
     monthlyIncome: {
       type: Number,

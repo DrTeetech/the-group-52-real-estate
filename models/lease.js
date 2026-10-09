@@ -79,6 +79,41 @@ const leaseSchema = new mongoose.Schema(
       min: 0,
     },
 
+    paymentDueDate: {
+      type: Date,
+    },
+
+    lateFee: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    noticePeriodDays: {
+      type: Number,
+      default: 30,
+      min: 0,
+    },
+
+    renewalTerms: {
+      type: String,
+      trim: true,
+      maxlength: 2000,
+      default: "Renewal by mutual agreement and written notice.",
+    },
+
+    occupancyLimit: {
+      type: Number,
+      min: 1,
+      default: 1,
+    },
+
+    additionalNotes: {
+      type: String,
+      trim: true,
+      maxlength: 3000,
+    },
+
     currency: {
       type: String,
       enum: ["NGN", "USD"],
@@ -113,11 +148,26 @@ const leaseSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+
+    terminationReason: {
+      type: String,
+      trim: true,
+      maxlength: 1000,
+    },
+
+    terminatedAt: Date,
   },
   {
     timestamps: true,
   }
 );
+
+leaseSchema.pre("validate", function (next) {
+  if (!this.leaseNumber) {
+    this.leaseNumber = `LEASE-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+  }
+  next();
+});
 
 leaseSchema.index({
   property: 1,
