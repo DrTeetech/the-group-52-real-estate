@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import CustomerList from "./pages/CustomerList";
 import StaffDashboard from "./pages/StaffDashboard";
+import ApplicationsPage from "./pages/ApplicationsPage";
 
 function App() {
   return (
@@ -23,8 +24,8 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/applications" element={<ApplicationsPage />} />
           <Route path="/dashboard/favorites" element={<CustomerList type="favorites" />} />
-          <Route path="/dashboard/applications" element={<CustomerList type="applications" />} />
           <Route path="/dashboard/viewings" element={<CustomerList type="viewings" />} />
           <Route path="/dashboard/inquiries" element={<CustomerList type="inquiries" />} />
           <Route path="/dashboard/leases" element={<CustomerList type="leases" />} />
