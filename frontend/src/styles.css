@@ -28,7 +28,7 @@ button { cursor: pointer; }
 .btn-small { padding:8px 13px; font-size:13px; }
 .btn-large { padding:14px 22px; }
 .full { width:100%; }
-.hero { min-height:600px; display:flex; align-items:center; padding:80px 7%; background:linear-gradient(120deg,#102d20,#275b42 55%,#6d866d); color:white; }
+.hero { min-height:600px; display:flex; align-items:center; padding:80px 7%; background:linear-gradient(90deg,rgba(9,31,20,.88),rgba(16,45,32,.64)),url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90") center/cover no-repeat; color:white; }
 .hero-content { max-width:720px; }
 .eyebrow { display:block; font-size:12px; letter-spacing:2px; font-weight:800; margin-bottom:14px; opacity:.8; }
 .hero h1 { font-size:clamp(42px,6vw,76px); line-height:1.02; margin:0 0 22px; letter-spacing:-3px; }

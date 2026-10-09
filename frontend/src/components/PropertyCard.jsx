@@ -2,15 +2,14 @@ import { Link } from "react-router-dom";
 import { api } from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import { getPropertyImage } from "../utils/propertyImages";
 
 export default function PropertyCard({ property }) {
   const { user } = useAuth();
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
 
-  const image =
-    property.media?.find((m) => m.type === "image" && m.isFeatured)?.url ||
-    property.media?.find((m) => m.type === "image")?.url;
+  const image = getPropertyImage(property);
 
   async function toggleFavorite() {
     if (!user) return;
@@ -33,11 +32,7 @@ export default function PropertyCard({ property }) {
   return (
     <article className="property-card">
       <div className="property-image">
-        {image ? (
-          <img src={image} alt={property.title} />
-        ) : (
-          <div className="image-placeholder">PROPERTY</div>
-        )}
+        <img src={image} alt={property.title} loading="lazy" onError={(e) => { e.currentTarget.style.display = "none"; }} />
         {property.isFeatured && <span className="badge badge-featured">Featured</span>}
         {user && (
           <button
