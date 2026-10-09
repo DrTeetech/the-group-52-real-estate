@@ -52,6 +52,7 @@ const propertySchema = new mongoose.Schema(
         "apartment",
         "duplex",
         "house",
+        "villa",
         "bungalow",
         "terrace",
         "penthouse",
@@ -168,7 +169,6 @@ const propertySchema = new mongoose.Schema(
         type: {
           type: String,
           enum: ["Point"],
-          default: "Point",
         },
 
         coordinates: {
@@ -189,6 +189,12 @@ const propertySchema = new mongoose.Schema(
     bathrooms: {
       type: Number,
       min: [0, "Bathrooms cannot be negative"],
+    },
+
+    units: {
+      type: Number,
+      min: [1, "Units must be at least one"],
+      default: 1,
     },
 
     parkingSpaces: {
@@ -283,7 +289,7 @@ const propertySchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["draft", "available", "reserved", "rented", "unavailable"],
+      enum: ["draft", "available", "reserved", "rented", "maintenance", "unavailable"],
       default: "draft",
       index: true,
     },
@@ -311,6 +317,12 @@ const propertySchema = new mongoose.Schema(
       index: true,
     },
 
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      index: true,
+    },
+
     // =========================================================
     // ANALYTICS
     // =========================================================
@@ -331,7 +343,7 @@ const propertySchema = new mongoose.Schema(
 // =============================================================
 
 propertySchema.pre("validate", function (next) {
-  if (this.isModified("title") || !this.slug) {
+  if (this.title && (this.isModified("title") || !this.slug)) {
     this.slug = slugify(this.title, {
       lower: true,
       strict: true,
